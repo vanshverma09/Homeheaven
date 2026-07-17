@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id               String            @id @default(cuid())
+  name             String
+  email            String            @unique
+  password         String
+  isAdmin          Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  siteVisits       SiteVisit[]
+  callbackRequests CallbackRequest[]
+  savedProperties  SavedProperty[]
+}
+
+model SavedProperty {
+  id         String   @id @default(cuid())
+  userId     String
+  propertyId Int
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, propertyId])
+}
+
+model SiteVisit {
+  id        String   @id @default(cuid())
+  userId    String?
+  name      String
+  mobile    String
+  email     String
+  date      String
+  time      String
+  property  String
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model CallbackRequest {
+  id            String   @id @default(cuid())
+  userId        String?
+  name          String
+  mobile        String
+  preferredDate String
+  preferredTime String
+  message       String?
+  createdAt     DateTime @default(now())
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model Property {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  location    String
+  city        String?
+  price       String
+  priceLabel  String?
+  type        String   // "Sale" | "Rent"
+  category    String?
+  status      String   @default("Available")
+  bedrooms    Int      @default(0)
+  bathrooms   Int      @default(0)
+  area        String
+  yearBuilt   Int      @default(0)
+  image       String
+  images      String[]
+  amenities   String[]
+  featured    Boolean  @default(false)
+  views       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  author    String
+  rating    Int
+  content   String
+  status    String   @default("Pending") // Pending, Approved, Rejected
+  createdAt DateTime @default(now())
+}
+
+model ContactRequest {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  status    String   @default("New") // New, Read, Resolved
+  createdAt DateTime @default(now())
+}

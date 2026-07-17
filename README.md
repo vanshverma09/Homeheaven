@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Propex Properties - Luxury Real Estate Platform
 
-## Getting Started
+Propex Properties is a state-of-the-art web application for discovering, comparing, and managing luxury real estate listings. Built with a modern technology stack, it offers a fast, accessible, and high-performance user experience, scoring exceptionally well on Google Lighthouse.
 
-First, run the development server:
+## 🚀 Features
 
+- **Dynamic Property Viewing**: Smooth page transitions, framer-motion animations, and lazy-loaded assets.
+- **Robust Authentication**: Fully integrated JWT-based authentication via HTTP-only cookies.
+- **Interactive Tools**: Features live EMI and Loan Eligibility calculators, comprehensive property comparison functionality, and a recently viewed property tracker.
+- **Advanced Admin Dashboard**: 
+  - Visual insights utilizing Recharts.
+  - Image upload capabilities built directly with Cloudinary.
+  - Property management (Add, Edit, Delete).
+  - Manage contact inquiries, site visits, and callback requests.
+- **Production-Ready & Optimized**:
+  - Implements SEO Best Practices (Dynamic Metadata, Open Graph, Sitemap, Robots.txt).
+  - Next.js Edge Middleware for Rate Limiting & Security Headers.
+  - Next.js Standalone Build output support for easy Dockerization.
+
+## 🛠 Tech Stack
+
+- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS & Framer Motion
+- **Database**: PostgreSQL (Managed via [Prisma ORM](https://www.prisma.io/))
+- **Form Handling**: React Hook Form + Zod
+- **Icons**: Lucide React
+- **Charts**: Recharts
+- **Image Hosting**: Cloudinary (`next-cloudinary`)
+
+## 💻 Running Locally
+
+### 1. Prerequisites
+Ensure you have Node.js 18+ and PostgreSQL installed locally.
+
+### 2. Environment Setup
+Copy the `.env.example` file to create a `.env` file:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env
+```
+Fill in your database connection string and secret keys.
+
+### 3. Database Migration
+Synchronize your local PostgreSQL database with the Prisma schema:
+```bash
+npx prisma db push
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. Start Development Server
+```bash
+npm run dev
+```
+Open `http://localhost:3000` to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛳 Production Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+For detailed production guidelines, please refer to our `DEPLOYMENT_GUIDE.md`. The project is pre-configured for deployment on platforms like Vercel (using the Edge middleware), or containerized deployment using the included `Dockerfile`.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📚 API Reference
+Please refer to `API_DOCUMENTATION.md` for a comprehensive overview of the RESTful API endpoints powering the application.

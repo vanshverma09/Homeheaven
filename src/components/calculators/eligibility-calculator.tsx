@@ -171,7 +171,7 @@ export function EligibilityCalculator() {
                     ))}
                   </Pie>
                   <Tooltip 
-                    formatter={(value: number) => `₹${Math.round(value).toLocaleString("en-IN")}`}
+                    formatter={(value: any) => `₹${Math.round(Number(value) || 0).toLocaleString("en-IN")}`}
                     contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
                   />
                 </PieChart>
